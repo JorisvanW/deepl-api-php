@@ -17,7 +17,7 @@ class DeepLApiClient
     /**
      * Endpoint of the remote API.
      */
-    const API_ENDPOINT = 'https://api.deepl.com/';
+    const API_ENDPOINT = 'https://api.deepl.com';
 
     /**
      * Version of the remote API.

@@ -15,6 +15,8 @@ class UsageEndpoint extends EndpointAbstract
 
     /**
      * Get the usage.
+     *
+     * @return \JorisvanW\DeepL\Api\Resources\BaseResource|\JorisvanW\DeepL\Api\Resources\Usage
      * @throws \JorisvanW\DeepL\Api\Exceptions\ApiException
      */
     public function get()

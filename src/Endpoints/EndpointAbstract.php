@@ -44,7 +44,7 @@ abstract class EndpointAbstract
      */
     protected function getRequest($path = null, $params = [])
     {
-        $result = $this->client->performHttpCall(self::REST_READ, "{$this->getResourcePath()}/{$path}" . $this->buildQueryString($params));
+        $result = $this->client->performHttpCall(self::REST_READ, rtrim("{$this->getResourcePath()}/{$path}", '/') . $this->buildQueryString($params));
 
         return ResourceFactory::createFromApiResult($result, $this->getResourceObject());
     }
