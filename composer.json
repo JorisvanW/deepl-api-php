@@ -1,0 +1,42 @@
+{
+    "name": "jorisvanw/deepl-api-php",
+    "description": "DeepL API PHP client library for the DeepL.com translation API.",
+    "keywords": [
+        "deepl",
+        "deeply",
+        "translation",
+        "translate",
+        "language",
+        "api",
+        "client",
+        "english",
+        "german",
+        "french"
+    ],
+    "homepage": "https://github.com/JorisvanW/deepl-api-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joris v. Willigen",
+            "email": "me@jorisvanw.me"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7 || ^6.5 || ^7.1"
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "You might want to install Guzzle if you want to use it as the HTTP client for DeepL"
+    },
+    "autoload": {
+        "psr-4": {
+            "JorisvanW\\DeepL\\Api\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit tests"
+    }
+}
