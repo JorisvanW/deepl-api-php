@@ -38,5 +38,6 @@
     },
     "scripts": {
         "test": "./vendor/bin/phpunit tests"
-    }
+    },
+    "minimum-stability": "stable"
 }
