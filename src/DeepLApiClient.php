@@ -129,8 +129,7 @@ class DeepLApiClient
             throw new ApiException("Invalid DeepL API key: '{$apiKey}'.");
         }
 
-        $this->apiKey      = $apiKey;
-        $this->oauthAccess = false;
+        $this->apiKey = $apiKey;
 
         return $this;
     }
@@ -180,8 +179,8 @@ class DeepLApiClient
         }
 
         $headers = [
-            'Accept'        => 'application/json',
-//            'Authorization' => "Bearer {$this->apiKey}",
+            'Accept' => 'application/json',
+            //            'Authorization' => "Bearer {$this->apiKey}",
         ];
 
         $request = new Request($httpMethod, $url, $headers, $httpBody);

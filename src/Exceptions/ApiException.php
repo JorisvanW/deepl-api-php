@@ -94,7 +94,7 @@ class ApiException extends \Exception
         }
 
         return new static(
-            "Error executing API call ({$object->status}: {$object->title}): {$object->detail}",
+            'Error executing API call. Statuscode: ' . $response->getStatusCode(),
             $response->getStatusCode(),
             $field,
             $response,

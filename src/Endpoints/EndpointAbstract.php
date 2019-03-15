@@ -5,6 +5,7 @@ namespace JorisvanW\DeepL\Api\Endpoints;
 use JorisvanW\DeepL\Api\DeepLApiClient;
 use JorisvanW\DeepL\Api\Resources\BaseResource;
 use JorisvanW\DeepL\Api\Exceptions\ApiException;
+use JorisvanW\DeepL\Api\Resources\BaseCollection;
 use JorisvanW\DeepL\Api\Resources\ResourceFactory;
 
 abstract class EndpointAbstract
@@ -26,6 +27,11 @@ abstract class EndpointAbstract
     protected $resourcePath;
 
     /**
+     * @var string
+     */
+    protected $resourceCollectionKey;
+
+    /**
      * @param DeepLApiClient $api
      */
     public function __construct(DeepLApiClient $api)
@@ -38,13 +44,24 @@ abstract class EndpointAbstract
      *
      * @param string|null $path
      * @param array       $params
+     * @param bool        $reponseIsCollection
      *
-     * @return BaseResource
+     * @return BaseResource|BaseCollection
      * @throws \JorisvanW\DeepL\Api\Exceptions\ApiException
      */
-    protected function getRequest($path = null, $params = [])
+    protected function getRequest($path = null, $params = [], $reponseIsCollection = false)
     {
         $result = $this->client->performHttpCall(self::REST_READ, rtrim("{$this->getResourcePath()}/{$path}", '/') . $this->buildQueryString($params));
+
+        if ($reponseIsCollection) {
+            $resultCopy = $result;
+
+            foreach ($result->{$this->getResourceCollectionKey()} as $key => $dataResult) {
+                $resultCopy->{$this->getResourceCollectionKey()}[$key] = ResourceFactory::createFromApiResult($dataResult, $this->getResourceObject());
+            }
+
+            return $resultCopy;
+        }
 
         return ResourceFactory::createFromApiResult($result, $this->getResourceObject());
     }
@@ -86,6 +103,23 @@ abstract class EndpointAbstract
      * @return BaseResource
      */
     abstract protected function getResourceObject();
+
+    /**
+     * @param string $resourceCollectionKey
+     */
+    public function setResourceCollectionKey($resourceCollectionKey)
+    {
+        $this->resourceCollectionKey = strtolower($resourceCollectionKey);
+    }
+
+    /**
+     * @return string
+     * @throws ApiException
+     */
+    public function getResourceCollectionKey()
+    {
+        return $this->resourceCollectionKey;
+    }
 
     /**
      * @param string $resourcePath
