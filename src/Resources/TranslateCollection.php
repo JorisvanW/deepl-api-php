@@ -2,9 +2,7 @@
 
 namespace JorisvanW\DeepL\Api\Resources;
 
-use JorisvanW\DeepL\Api\DeepLApiClient;
-
-class Translate extends BaseResource
+class TranslateCollection extends BaseResource
 {
     /**
      * The translated text.
